@@ -19,23 +19,8 @@ namespace TestDbKarasev2.Controllers
             //_productRepository = productRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> Get()
-        {
-            return await _context.Products.ToListAsync();
-            /*
-             * var result = GetProducts(); // await GetProducts(). GetAwaiter?
-
-            if (result == null)
-            /{
-                return NotFound();
-            }
-            return Ok(result);*/
-        }
-
-
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> Get(int id)
+        public async Task<ActionResult<Product>> Get(Guid id)
         {
             Product product = await _context.Products.FirstOrDefaultAsync(h => h.Id == id);  // что за предупреждение?
 
@@ -91,7 +76,7 @@ namespace TestDbKarasev2.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<Product>>> Remove(int id)
+        public async Task<ActionResult<List<Product>>> Remove(Guid id)
         {
             Product product =_context.Products.FirstOrDefault(h => h.Id == id); // async? error
 
