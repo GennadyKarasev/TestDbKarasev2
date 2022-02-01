@@ -1,2 +1,1 @@
-﻿public async Task<ActionResult<Product>> Get(int id) не фильтрует, а выводит всё.
-GetAwaiter
+﻿  [Table("Product")] - не работает?

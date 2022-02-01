@@ -19,6 +19,17 @@ namespace TestDbKarasev2.Controllers
             //_productRepository = productRepository;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<Product>>> Get()
+        {
+            List<Product> product = _context.Products.ToList();  // не работает, если Description не заполнено. Почему? Там же String.Empty;
+
+            if (product == null)
+                return NotFound();
+
+            return new ObjectResult(product);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> Get(Guid id)
         {
@@ -30,7 +41,7 @@ namespace TestDbKarasev2.Controllers
             return new ObjectResult(product);
         }
 
-        [HttpPost("{search}")]
+        [HttpPost("{name}")]
         public async Task<ActionResult<IEnumerable<Product>>> Get(string name)
         {
             IEnumerable<Product> products = await _context.Products.ToListAsync();
